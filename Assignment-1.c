@@ -31,7 +31,7 @@ list LinkedList; //Global variable
 
 element aasel(atom a){
     struct  _listnode *pointer = LinkedList;
-    while(pointer->next){
+    while(pointer != NULL){
         
         element el = pointer -> el;
         if(a == el.a){
@@ -52,7 +52,7 @@ element aasel(atom a){
 
 element lasel(list l){
     struct  _listnode *pointer = LinkedList;
-    while(pointer->next){
+    while(pointer != NULL){
         
         element el = pointer -> el;
 
@@ -84,7 +84,7 @@ list cdr(element e){
     }else{
         int count = 1;
         struct  _listnode *node = e.l;
-        while((node -> next) -> next){
+        while((node -> next) != NULL){
             count++;
             node = node -> next;
         }
@@ -112,7 +112,7 @@ void print(element e){
     }else if(e.type == LIST){
         printf("\"");
         struct  _listnode *node = e.l;
-        while(node->next){
+        while(node != NULL){
             print(node->el);
             node = node -> next;
 
@@ -129,7 +129,7 @@ void print(element e){
 void lfreer(list l){ 
     struct _listnode *pointer;
 
-   while (l -> next)
+   while (l != NULL)
     {
        pointer = l;
        l = l->next;
@@ -141,8 +141,9 @@ void lfreer(list l){
 list cons(element e, list l){
 
 
-    list newlist = l;
+    list newlist;
     newlist = malloc(sizeof(list));
+    newlist = l;
 
     struct  _listnode *newnode;
     newnode = malloc(sizeof(struct _listnode));
@@ -154,8 +155,9 @@ list cons(element e, list l){
 }
 
 int main(){
-    struct  _listnode *last = NULL;
+    struct  _listnode *last;
     last = malloc(sizeof(struct _listnode));
+    last =  NULL;
 
     struct _listnode *new;
     new = malloc(sizeof(struct _listnode));
@@ -187,7 +189,7 @@ int main(){
     list returnedTail = cdr(newE3);
 
     printf("\n\n");
-    printf("Running cdrdr with element of type list containing \" e c \"...\n\n");
+    printf("Running cdrdr with element of type list containing \" c e \"...\n\n");
     list returnedCdrdr = cdrdr(newE3);
     
 
