@@ -84,6 +84,7 @@ list cdr(element e){
     }else{
         int count = 1;
         struct  _listnode *node = e.l;
+        struct _listnode *pointer = node;
         while((node -> next) != NULL){
             count++;
             node = node -> next;
@@ -92,13 +93,11 @@ list cdr(element e){
             printf("Null returned with count of %d\n", count);
             return NULL;
         }else{
-            if((node ->el).type == LIST){
-                printf("Node was returned with count of %d, its list value is ",count);
-                print(node->el);
-            }else{
-                printf("Node was returned with count of %d, its atom value is %c\n",count,(node->el).a);
-            }
-            return node;
+            printf("A list tail was returned with values : ");
+            element newElement = {.type=LIST,.l = pointer -> next};
+            print(newElement);
+            printf("\n");
+            return pointer -> next;
         }
     }
 
@@ -258,11 +257,19 @@ int main(){
 
     printf("------------------------------------------------------------------------------\n");
     printf("Calling print() to get values of LinkedList containing \" { c e } c e \"...\n");
+    
     list pointer = LinkedList;
     while(pointer != NULL){
         print(pointer->el);
         pointer = pointer -> next;
     }   
+    printf("\n\n");
+
+    printf("------------------------------------------------------------------------------\n");
+    printf("Calling cdr() to get tail of LinkedList containing \" { c e } c e \"...\n");
+    
+    element linkedListel = {.type=LIST,.l=LinkedList};
+    cdr(linkedListel);
     printf("\n\n");
 
     printf("------------------------------------------------------------------------------\n");
