@@ -17,7 +17,7 @@ typedef struct _listnode { //Contains element (atom or listnode and type) and ne
     element el;
     struct _listnode* next;
 } * list; //Declares list as a pointer to a _listnode
-const element NIL = { .type=LIST, .l=NULL }; //Last element of linked list
+const element NIL = { .type=LIST, .l=NULL }; 
 
 
 
