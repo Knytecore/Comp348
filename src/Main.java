@@ -6,8 +6,7 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
+
 import java.util.Scanner;
 
 public class Main {
@@ -55,7 +54,7 @@ public class Main {
 		while (sc.hasNextLine()) {
 
 			line = sc.nextLine().split(",");
-			if (line[0].equals("Square")) {
+			if (line[0].equals("Rectangle")) {
 				Rectangle r = new Rectangle();
 				r = Rectangle.parse(line);
 				list.add(r);
@@ -66,9 +65,24 @@ public class Main {
 			}
 
 		}
-	
+
+		// Sorting using comparator
+		
+		// Sorting by area (from smallest to biggest)
+		Collections.sort(list, Shape.areaComparator);
+		
+		// Sorting by shape name (Circles together, rectangles together)
+		System.out.println("Sorting by Shape:");
+		
+		Collections.sort(list, Shape.nameComparator);
+
+		for (Shape shape : list) {
+			//System.out.println(shape + " Area: " + shape.getArea());
+			Printable.print(shape);
+		}
+		//Printable.print(list);
 		sc.close(); // Must close the file
-	
+
 		return list;
 	}
 
