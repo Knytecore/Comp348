@@ -65,22 +65,34 @@ public class Main {
 			}
 
 		}
+		
+		
+		
+		// Display original list in txt file
+		System.out.println("\nDisplaying unsorted Shapes in txt file:");
+		
+		for (Shape shape : list) {
+			Printable.print(shape);
+		}
 
 		// Sorting using comparator
 		
 		// Sorting by area (from smallest to biggest)
+		System.out.println("\n\nSorting by Area:");
 		Collections.sort(list, Shape.areaComparator);
 		
+		for (Shape shape : list) {
+			Printable.print(shape);
+		}
+		
 		// Sorting by shape name (Circles together, rectangles together)
-		System.out.println("Sorting by Shape:");
+		System.out.println("\n\nSorting previsouly sorted list by Shape:");
 		
 		Collections.sort(list, Shape.nameComparator);
 
 		for (Shape shape : list) {
-			//System.out.println(shape + " Area: " + shape.getArea());
 			Printable.print(shape);
 		}
-		//Printable.print(list);
 		sc.close(); // Must close the file
 
 		return list;

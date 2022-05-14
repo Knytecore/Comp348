@@ -7,20 +7,20 @@ struct _listnode; //Define _listnode identifier within struct namespace. Need _l
 typedef struct { //Define anonymous struct, define that as type of element, and add alias "element" in global namespace (struct not require in front)
     eltype type;
     union { //Union stores diff data type in same memory location (either atom or _listnode, don't need two memory locations)
-    atom a;
-    struct _listnode* l;
+        atom a;
+        struct _listnode* l;
     };
 } element;
 
 typedef struct _listnode { //Contains element (atom or listnode and type) and next node.
     element el;
-    struct _listnode* next; 
-} * list; //Declares list as a pointer to a _listnode
-const element NIL = { .type=LIST, .l=NULL }; 
+    struct _listnode* next;
+} *list; //Declares list as a pointer to a _listnode
+const element NIL = { .type = LIST, .l = NULL };
 
 
 
-static const char *eltypeString[] = {
+static const char* eltypeString[] = {
     "ATOM","LIST"
 };
 
@@ -28,12 +28,12 @@ static const char *eltypeString[] = {
 void print(element e);
 list LinkedList; //Global variable
 
-element aasel(atom a){
-    struct  _listnode *pointer = LinkedList;
-    while(pointer != NULL){
-        
-        element el = pointer -> el;
-        if(a == el.a){
+element aasel(atom a) {
+    struct  _listnode* pointer = LinkedList;
+    while (pointer != NULL) {
+
+        element el = pointer->el;
+        if (a == el.a) {
             printf("Corresponding atom found and returned.\n");
             return el;
         }
@@ -46,16 +46,16 @@ element aasel(atom a){
 
 
 
-    
+
 }
 
-element lasel(list l){
-    struct  _listnode *pointer = LinkedList;
-    while(pointer != NULL){
-        
-        element el = pointer -> el;
+element lasel(list l) {
+    struct  _listnode* pointer = LinkedList;
+    while (pointer != NULL) {
 
-        if(l == el.l){
+        element el = pointer->el;
+
+        if (l == el.l) {
             printf("Corresponding list found and returned.\n");
             return el;
         }
@@ -67,174 +67,179 @@ element lasel(list l){
 
 }
 
-element car(element e){
-    if(e.type != LIST){
+element car(element e) {
+    if (e.type != LIST) {
         printf("Returned NIL. Not a list.");
         return NIL;
-    }else{
-        struct  _listnode *node = e.l;
-        return node -> el;
+    }
+    else {
+        struct  _listnode* node = e.l;
+        return node->el;
     }
 }
 
 
-list cdr(element e){
-    if(e.type != LIST){
+list cdr(element e) {
+    if (e.type != LIST) {
         printf("Null returned because not a list\n");
         return NULL;
-    }else{
+    }
+    else {
         int count = 1;
-        struct  _listnode *node = e.l;
-        struct _listnode *pointer = node;
-        while((node -> next) != NULL){
+        struct  _listnode* node = e.l;
+        struct _listnode* pointer = node;
+        while ((node->next) != NULL) {
             count++;
-            node = node -> next;
+            node = node->next;
         }
-        if(count == 0 || count == 1){
+        if (count == 0 || count == 1) {
             printf("Null returned with count of %d\n", count);
             return NULL;
-        }else{
+        }
+        else {
             printf("A list tail was returned with values : ");
-            element newElement = {.type=LIST,.l = pointer -> next};
+            element newElement = { .type = LIST,.l = pointer->next };
             print(newElement);
             printf("\n");
-            return pointer -> next;
+            return pointer->next;
         }
     }
 
 }
 
-list cdrdr(element e){
+list cdrdr(element e) {
     printf("Running cdr for first time... \n");
     list a = cdr(e);
     printf("Running cdr for second time... \n");
     return cdr(a->el);
 }
 
-void print(element e){
-    if(e.type == LIST && e.l == NULL){
+void print(element e) {
+    if (e.type == LIST && e.l == NULL) {
         printf("NIL");
-    }else if(e.type == LIST){   
+    }
+    else if (e.type == LIST) {
         printf("(");
-        struct  _listnode *node = e.l;
-        while(node != NULL){
+        struct  _listnode* node = e.l;
+        while (node != NULL) {
             print(node->el);
-            node = node -> next;
-        }   
+            node = node->next;
+        }
         printf(")");
 
-    }else if(e.type == ATOM){
-        printf(" %c ",e.a);
+    }
+    else if (e.type == ATOM) {
+        printf(" %c ", e.a);
 
     }
 
 }
 
-void lfreer(list l){ 
-    struct _listnode *pointer;
+void lfreer(list l) {
+    struct _listnode* pointer;
 
-   while (l != NULL)
+    while (l != NULL)
     {
-       pointer = l;
-       l = l->next;
-       free(pointer);
+        pointer = l;
+        l = l->next;
+        free(pointer);
 
     }
 }
 
-list cons(element e, list l){
+list cons(element e, list l) {
 
-    struct  _listnode *last;
-    last = malloc(sizeof(struct _listnode));
-    last =  NULL;
+    struct  _listnode* last;
+    last = malloc(sizeof(*last));
+    last = NULL;
 
     list newlist;
-    newlist = malloc(sizeof(list));
-    element newElement = {.type=LIST,.l = l};
-    newlist -> el = newElement;
-    newlist -> next = last;
+    newlist = malloc(sizeof(*newlist));
+    element newElement = { .type = LIST,.l = l };
+    newlist->el = newElement;
+    newlist->next = last;
 
-    struct  _listnode *newnode;
-    newnode = malloc(sizeof(struct _listnode));
-    newnode -> el = e;
-    newnode -> next = newlist;
+    struct  _listnode* newnode;
+    newnode = malloc(sizeof(*newnode));
+    newnode->el = e;
+    newnode->next = newlist;
 
 
     return newnode;
 
 }
 
-list append(list l1, list l2){
+list append(list l1, list l2) {
     list pointer = l1;
-    while((l1 -> next) != NULL){
-        l1 = l1 -> next;
+    while ((l1->next) != NULL) {
+        l1 = l1->next;
     }
-    
-    l1 -> next = l2;
-    return pointer; 
-    
+
+    l1->next = l2;
+    return pointer;
+
 }
 
-int main(){
+int main() {
     //B-C list
-    struct  _listnode *last;
-    last = malloc(sizeof(struct _listnode)); //malloc returns a pointer
-    last -> next =  NULL;
-    last -> el = NIL;
+    struct  _listnode* last;
+    last = malloc(sizeof(*last)); //malloc returns a pointer
+    last->next = NULL;
+    last->el = NIL;
 
-    struct _listnode *new;
-    new = malloc(sizeof(struct _listnode));
-    element newEl = {.type=ATOM,.a='c'};
-    new -> el = newEl;
-    new -> next = last;
+    struct _listnode* new;
+    new = malloc(sizeof(*new));
+    element newEl = { .type = ATOM,.a = 'c' };
+    new->el = newEl;
+    new->next = last;
 
 
 
-    struct _listnode *new2;
-    new2 = malloc(sizeof(struct _listnode));
-    element newE2 = {.type=ATOM,.a='b'};
-    new2 -> el = newE2;
-    new2 -> next = new;
+    struct _listnode* new2;
+    new2 = malloc(sizeof(*new2));
+    element newE2 = { .type = ATOM,.a = 'b' };
+    new2->el = newE2;
+    new2->next = new;
 
 
 
     //Main linkedlist
-    struct  _listnode *last2;
-    last2 = malloc(sizeof(struct _listnode)); //malloc returns a pointer
-    last2 -> next =  NULL;
-    last2 -> el = NIL;
+    struct  _listnode* last2;
+    last2 = malloc(sizeof(*last2)); //malloc returns a pointer
+    last2->next = NULL;
+    last2->el = NIL;
 
-    struct _listnode *new3;
-    new3 = malloc(sizeof(struct _listnode));
-    element newEl3 = {.type=ATOM,.a='e'};
-    new3 -> el = newEl3;
-    new3 -> next = last2;
-
-
-    struct _listnode *new4;
-    new4 = malloc(sizeof(struct _listnode));
-    element newEl4 = {.type=ATOM,.a='d'};
-    new4 -> el = newEl4;
-    new4 -> next = new3;
-
-    struct _listnode *new5;
-    new5 = malloc(sizeof(struct _listnode));
-    element newEl5 = {.type=LIST,.l=new2};
-    new5 -> el = newEl5;
-    new5 -> next = new4;
+    struct _listnode* new3;
+    new3 = malloc(sizeof(*new3));
+    element newEl3 = { .type = ATOM,.a = 'e' };
+    new3->el = newEl3;
+    new3->next = last2;
 
 
+    struct _listnode* new4;
+    new4 = malloc(sizeof(*new4));
+    element newEl4 = { .type = ATOM,.a = 'd' };
+    new4->el = newEl4;
+    new4->next = new3;
+
+    struct _listnode* new5;
+    new5 = malloc(sizeof(*new5));
+    element newEl5 = { .type = LIST,.l = new2 };
+    new5->el = newEl5;
+    new5->next = new4;
 
 
 
-    struct _listnode *head;
-    head = malloc(sizeof(struct _listnode));
-    element headEL = {.type=ATOM,.a='a'};
-    head -> el = headEL;
-    head -> next = new5;
 
 
-    element linkedList = {.type=LIST,.l=head};
+    struct _listnode* head;
+    head = malloc(sizeof(*head));
+    element headEL = { .type = ATOM,.a = 'a' };
+    head->el = headEL;
+    head->next = new5;
+
+
+    element linkedList = { .type = LIST,.l = head };
 
 
 
@@ -267,6 +272,6 @@ int main(){
     lfreer(head);
 
 
-   
+
 }
 
