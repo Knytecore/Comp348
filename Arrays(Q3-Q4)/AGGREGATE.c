@@ -49,7 +49,7 @@ int main() {
 
 float min(float* arr, int size) {
     if (!(size > 0)) {
-        printf("FATAL ERROR in line 6 of AGGREGATE.h");
+        printf("FATAL ERROR in line 52 of AGGREGATE.c");
         exit();
     }
     float min = arr[0];
@@ -64,7 +64,7 @@ float min(float* arr, int size) {
 
 float max(float* arr, int size) {
     if (!(size > 0)) {
-        printf("FATAL ERROR in line 21 of AGGREGATE.h");
+        printf("FATAL ERROR in line 67 of AGGREGATE.c");
         exit();
     }
     float max = arr[0];
@@ -79,7 +79,7 @@ float max(float* arr, int size) {
 
 float sum(float* arr, int size) {
     if (!(size > 0)) {
-        printf("FATAL ERROR in line 36 of AGGREGATE.h");
+        printf("FATAL ERROR in line 82 of AGGREGATE.c");
         exit();
     }
     float sum = 0;
@@ -91,12 +91,20 @@ float sum(float* arr, int size) {
 }
 
 float avg(float* arr, int size) {
+    if (!(size > 0)) {
+        printf("FATAL ERROR in line 95 of AGGREGATE.c");
+        exit();
+    }
     float average = sum(arr, size);
     average = average / size;
     return average;
 }
 
 float pseudo_avg(float* arr, int size) {
+    if (!(size > 0)) {
+        printf("FATAL ERROR in line 105 of AGGREGATE.c");
+        exit();
+    }
     float minVal = min(arr, size);
     float maxVal = max(arr, size);
 
