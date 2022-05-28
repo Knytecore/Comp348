@@ -13,4 +13,4 @@
     (findcharacter(cdr newlist)) ; if yes recurse on the tail of the list
     (cons(car newlist) (findcharacter(cdr newlist))))))
 
-(step(flatten-nums-nodup '(1 2 (3 1) (a 2.5) (2 4.5) ((1 2)))))
+(print(flatten-nums-nodup '(1 2 (3 1) (a 2.5) (2 4.5) ((1 2)))))
