@@ -1,9 +1,0 @@
-(defun depth (list)
-                (if (listp list)
-                    (+ 1 (reduce #'max (mapcar #'depth list)
-                                 :initial-value -1))
-                    0))
-                    
-
-
-(write (depth NIL))
