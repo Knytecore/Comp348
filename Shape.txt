@@ -1,7 +1,0 @@
-Circle,3
-Rectangle,2,2
-Rectangle,4,5
-Circle,2.5
-Rectangle,2.5,2
-Rectangle,10,5.5
-Circle,10
