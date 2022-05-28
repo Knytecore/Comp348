@@ -6,4 +6,8 @@
                     
 
 
-(write (depth NIL))
+(print (depth NIL))
+(print  (depth 1))
+(print  (depth '(1)))
+(print (depth '((2))))
+(print (depth '((2)(3 (6))(4))))
