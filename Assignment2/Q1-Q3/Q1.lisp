@@ -1,7 +1,7 @@
-(defun sub-list(list from to)
+(defun sub-list(list from &optional (to (length list)))
     (setq size (length list)) ;size variable to determine out of bounds
      
-    (if (> from size) ; out of bound index
+    (if (or(> from size)(<= from 0)) ; out of bound index
         (return-from sub-list nil)) ;returns NIL if from is not on the list
         
     (if (> to size) ; checking index for out of bound
@@ -26,4 +26,8 @@
     )                  
          
          
-(print (sub-list '(1 6 12 5) 2 4)) ; Examples
+(print  (sub-list '(1 4 10) 2 3)) ; Examples
+(print   (sub-list '(1 4 10) 2)) ; Examples
+(print   (sub-list '(1 7 12) 1 4)) ; Examples
+(print   (sub-list '(1 7 12) 0 1)) ; Examples
+(print  (sub-list '(1 6 12) 4 2)) ; Examples

@@ -1,19 +1,23 @@
-(defun sub-list2(list from to)
-    (setq size (length list))
+(defun sub-list(list from &optional (to (length list)))
+    (setq size (length list)) ;size variable to determine out of bounds
+    
+    (if (> from to) ; from greater than to
+    (return-from sub-list nil)) ;returns NIL if from greater than to
+     
+    (if (or(> from size)(<= from 0)) ; out of bound index
+        (setq from 1)) ;Set from to 1
+        
+    (if (> to size) ; checking index for out of bound
+        (setq to (length list))) ;returns NIL if from is not on the list
 
-    (if (> from size)
-        (return-from sub-list2 nil))
-
-    (if (> to size)
-        (return-from sub-list2 nil))
-
-    (setq sub2 ()) 
-    (setq counter 0) 
-
-    (loop for a in list do
-        (setq counter (+ counter 1))
-        (if (and (>= counter from) (<= counter to))
-            (setq sub2 (cons a sub2)))
+  
+    (setq sub ()) ; Creating list to display
+    (setq count 0) ; index from to poition
+   
+    (loop for a in list do     ;Going through list elements
+        (setq count (+ count 1))
+        (if (and (>= count from) (<= count to))
+            (setq sub (cons a sub)))
     ) 
     
     (defun rev (list) ;Results are reversed, we need to reverse the list to obtain the right order
@@ -21,14 +25,14 @@
        (reversed '() (list* (first list) reversed)))
       ((endp list) reversed)))
     
-        (setq sub2 (rev sub2)) ;reversed list placed into sub
-    (return-from sub-list2 sub2) ;sub list is returned
-    
-      
-    (setq sub2 (rev sub2))
-    (return-from sub-list2 sub2) 
-    )
-
-    (print (sub-list2 '(1 4 10)2 3))  
-    (print (sub-list2 '(1 6 12)4 2)) 
-    (print (sub-list2 '(1 6 12)))
+        (setq sub (rev sub)) ;reversed list placed into sub
+    (return-from sub-list sub) ;sub list is returned
+    )                  
+         
+         
+(print  (sub-list '(1 4 10) 2 3)) ; Examples
+(print   (sub-list '(1 4 10) 2)) ; Examples
+(print   (sub-list '(1 7 12) 1 4)) ; Examples
+(print   (sub-list '(1 7 12) 0 1)) ; Examples
+(print  (sub-list '(1 6 12) 4 2)) ; Examples
+(print (sub-list '(1 6 12))) ; Examples
