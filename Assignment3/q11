@@ -10,3 +10,6 @@ lucas(N, R) :-
 seq(M, Result) :-
     numlist(0, M, List),
     maplist(lucas, List, Result).
+
+
+Query example: seq(4, Result)
