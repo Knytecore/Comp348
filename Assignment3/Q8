@@ -24,4 +24,5 @@ Query:
 student(Name,ID),findall(CourseName, course(Name, CourseName,CourseNumber), CourseList);
 findall(Name, student(Name,ID), StudentList), length(StudentList, TeamSize);
 uniqueCourses(UniqueCourse);
-uniqueCoursesSort(SortedUniqueCourse)
+uniqueCoursesSort(SortedUniqueCourse);
+uniqueCoursesSort(List), [A,B|C] = List
