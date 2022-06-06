@@ -127,39 +127,39 @@ RhombusCount = 0
 # Nested loop to read the content stored in the list and use it to create objects
 for line in lines:
     for element in line:
-        if element == 'shape':
-            fo = Shape()
+        if element == 'shape':  # check what the element is
+            fo = Shape()  # create the Shape object
             fo.print()
-            ShapeCount += 1
+            ShapeCount += 1  # increase the counter for Shape
         elif element == 'rhombus':
-            s = int(line[1])
-            t = int(line[2])
-            rhombus = Rhombus(s, t)
-            if s * t < 0:
+            s = int(line[1])  # convert the string into int
+            t = int(line[2])  # convert the string into int
+            rhombus = Rhombus(s, t)  # create the Rhombus object
+            if s * t < 0:  # print error message if negative
                 print('ERROR : Invalid Rhombus')
             else:
-                rhombus.print()
-                print(rhombus.inradius())
-            ShapeCount += 1
-            RhombusCount += 1
+                rhombus.print()  # print the rhombus object
+                print(rhombus.inradius())  # print in-radius
+            ShapeCount += 1  # increase the counter for Shape
+            RhombusCount += 1  # increase the counter for Rhombus
         elif element == 'circle':
-            r = int(line[1])
-            circle = Circle(r)
-            circle.print()
-            ShapeCount += 1
-            CircleCount += 1
+            r = int(line[1])  # convert the string into int
+            circle = Circle(r)  # create Circle object
+            circle.print()  # print the circle object
+            ShapeCount += 1  # increase the counter for Shape
+            CircleCount += 1  # increase the counter for Circle
         elif element == 'ellipse':
-            c = int(line[1])
-            d = int(line[2])
+            c = int(line[1])  # convert the string into int
+            d = int(line[2])  # convert the string into int
             ellipse = Ellipse(c, d)
-            if c * d < 0:
+            if c * d < 0:  # print error message if negative
                 print('ERROR : Invalid Ellipse')
-                ellipse.print()
+                ellipse.print()  # print the Ellipse object
             else:
-                ellipse.print()
-                print(ellipse.eccentricity())
-            ShapeCount += 1
-            EllipseCount += 1
+                ellipse.print()  # print the Ellipse object
+                print(ellipse.eccentricity())  # print eccentricity
+            ShapeCount += 1  # increase the counter for Shape
+            EllipseCount += 1  # increase the counter for Ellipse
 
 print("")
 print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
