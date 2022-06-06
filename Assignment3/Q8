@@ -6,6 +6,7 @@ student(lentz,27003900).
 course(yulong,data_structures_and_algorithms, 352).
 course(yulong,programming_languages, 348).
 course(lentz,programming_languages, 348).
+course(lentz,data_structures_and_algorithms, 352).
 course(lentz,introduction_to_Business_and_Management,201).
 course(andy,data_structures_and_algorithms, 352).
 course(andy,programming_languages, 348).
@@ -13,9 +14,9 @@ course(andy,sustainable_Development_and_environmental_stewardship,202).
 course(camila,programming_languages, 348).
 course(camila,sustainable_Development_and_environmental_stewardship,202).
 course(camila,applied_Ordinary_Differential_Equations ,202).
+course(camila,data_structures_and_algorithms, 352).
 
-
-uniqueCourses(UniqueCourse):- findall(CourseName, (course(yulong,CourseName,CourseNumber),course(andy,CourseName,CourseNumber),course(lentz,CourseName,CourseNumber),course(camila,CourseName,CourseNumber)), UniqueCourse).
+uniqueCourses(UniqueCourse):- findall(CourseNumber, (course(yulong,CourseName,CourseNumber),course(andy,CourseName,CourseNumber),course(lentz,CourseName,CourseNumber),course(camila,CourseName,CourseNumber)), UniqueCourse).
 uniqueCoursesSort(X):- uniqueCourses(A), sort(A,X).
 
 Query:
