@@ -1,0 +1,26 @@
+student(yulong,40209189).
+student(camila,40208489).
+student(andy,40199798).
+student(lentz,27003900).
+
+course(yulong,data_structures_and_algorithms, 352).
+course(yulong,programming_languages, 348).
+course(lentz,programming_languages, 348).
+course(lentz,introduction_to_Business_and_Management,201).
+course(andy,data_structures_and_algorithms, 352).
+course(andy,programming_languages, 348).
+course(andy,sustainable_Development_and_environmental_stewardship,202).
+course(camila,programming_languages, 348).
+course(camila,sustainable_Development_and_environmental_stewardship,202).
+course(camila,applied_Ordinary_Differential_Equations ,202).
+
+
+uniqueCourses(UniqueCourse):- findall(CourseName, (course(yulong,CourseName,CourseNumber),course(andy,CourseName,CourseNumber),course(lentz,CourseName,CourseNumber),course(camila,CourseName,CourseNumber)), UniqueCourse).
+uniqueCoursesSort(X):- uniqueCourses(A), sort(A,X).
+
+Query:
+
+student(Name,ID),findall(CourseName, course(Name, CourseName,CourseNumber), CourseList);
+findall(Name, student(Name,ID), StudentList), length(StudentList, TeamSize);
+uniqueCourses(UniqueCourse);
+uniqueCoursesSort(SortedUniqueCourse)
