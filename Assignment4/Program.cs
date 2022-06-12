@@ -10,7 +10,6 @@ namespace Assignment4_348
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello Camila");
             Rectangle test = Rectangle.Parse("Rectangle,4,10");
             test.Print();
             Console.WriteLine(test.GetPerimeter());
