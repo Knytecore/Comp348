@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+
 
 namespace Assignment4_348
 {
@@ -19,6 +21,8 @@ namespace Assignment4_348
             test2.Print();
             Console.WriteLine(test2.GetPerimeter());
             Console.WriteLine(test2.GetArea());
+            TextFileProcessor.Read("Shapes.txt");
+
 
         }
 
@@ -158,6 +162,38 @@ namespace Assignment4_348
         {
             Console.WriteLine(a.ToString());
             
+        }
+    }
+
+    public class TextFileProcessor
+    {
+        public static event EventHandler ?LineRead;
+
+
+        public static void Read(String file)
+        {
+            var fileStream = File.OpenRead(file);
+            StreamReader streamReader = new StreamReader(fileStream, Encoding.UTF8, true);
+            
+            String ?line;
+            while ((line = streamReader.ReadLine()) != null)
+            {
+                // Process line
+                EventHandler ?handler = LineRead;
+                Console.WriteLine(line);
+                handler?.Invoke(new Object(), new MyEventArgs(line));
+            }
+            
+        }
+    }
+
+    public class MyEventArgs : EventArgs
+    {
+        public string MyEventString { get; set; }
+
+        public MyEventArgs(string myString)
+        {
+            this.MyEventString = myString;
         }
     }
 
