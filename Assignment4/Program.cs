@@ -172,11 +172,8 @@ namespace Assignment4_348
 
         public static void Read(String file)
         {
-            var fileStream = File.OpenRead(file);
-            StreamReader streamReader = new StreamReader(fileStream, Encoding.UTF8, true);
             
-            String ?line;
-            while ((line = streamReader.ReadLine()) != null)
+            foreach (string line in File.ReadLines(file))
             {
                 // Process line
                 EventHandler ?handler = LineRead;
